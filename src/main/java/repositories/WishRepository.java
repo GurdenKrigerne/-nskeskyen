@@ -31,7 +31,7 @@ public class WishRepository {
 
     //deleteWish
     public boolean deleteWishById(int id) {
-        String sql = "DELETE FROM wishes WHERE id = ?"; // Fjerner ønsket med det specifikke id
+        String sql = "DELETE FROM Wishes WHERE id = ?"; // Fjerner ønsket med det specifikke id
         int rowsAffected = jdbcTemplate.update(sql, id); //returnerer antallet af slettede rækker
         return rowsAffected > 0; // True = slettet, false = ikke fundet
     }

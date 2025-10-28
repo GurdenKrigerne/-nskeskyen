@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ønske Detaljer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            padding: 40px;
+        }
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+        h1 { color: #333; }
+        .wish-info {
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+        a.button {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: #0275d8;
+            color: white;
+            border-radius: 8px;
+        }
+        a.button:hover {
+            background: #025aa5;
+        }
+        .error {
+            color: #d9534f;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Detaljer for Ønske</h1>
+
+    <div th:if="${errorMessage}" class="error" th:text="${errorMessage}"></div>
+
+    <div th:if="${wish}" class="wish-info">
+        <p><strong>ID:</strong> <span th:text="${wish.wishId}"></span></p>
+        <p><strong>Titel:</strong> <span th:text="${wish.titel}"></span></p>
+        <p><strong>Pris:</strong> <span th:text="${wish.price}"></span> kr.</p>
+        <p><strong>Beskrivelse:</strong> <span th:text="${wish.description}"></span></p>
+    </div>
+
+    <a href="/wishes/delete" class="button">Slet et Ønske</a>
+</div>
+</body>
+</html>

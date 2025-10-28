@@ -2,9 +2,8 @@ package controller;
 
 import models.Wish;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import service.WishService;
 
 @Controller
@@ -17,25 +16,31 @@ public class WishController {
     }
 
     // GET /wishes/{id} - Hent et specifikt ønske
-    @GetMapping("/{id}")
-    public Wish showWish(@PathVariable int id) {
+    @GetMapping("/wishes/{id}")
+    public String showWish(@PathVariable int id, Model model) {
         Wish wish = wishService.findWishById(id);
+
         if (wish == null) {
-            throw new RuntimeException("Ønsket med id " + id + " findes ikke");
+            model.addAttribute("errorMessage", "Ønsket med ID " + id + " findes ikke.");
+            return "FindByWishId"; // viser fejlbesked i samme skabelon
         }
-        return wish;
+
+        model.addAttribute("wish", wish);
+        return "FindByWishId"; // viser HTML-siden med ønskeinfo
     }
 
-    // DELETE /wishes/{id}
-    @DeleteMapping("/{id}")
-    public String deleteWishById(@PathVariable int id) {
-        boolean deleted = wishService.deleteWish(id);
+    // DELETE /wishes/delete/{id}
+    @PostMapping("/wishes/delete")
+    public String deleteWishById(@RequestParam("wishId") int wishId, Model model) {
+        boolean deleted = wishService.deleteWish(wishId);
+
         if (deleted) {
-            return "Ønsket med ID " + id + " blev slettet.";
+            model.addAttribute("message", "Ønsket med ID " + wishId + " blev slettet!");
         } else {
-            return "Ingen ønske fundet med ID " + id + ".";
+            model.addAttribute("message", "Ingen ønske fundet med ID " + wishId + ".");
         }
-    }
 
+        return "delete-wish"; // vis samme side igen med besked
+    }
 
 }
