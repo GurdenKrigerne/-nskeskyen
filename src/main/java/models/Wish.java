@@ -3,13 +3,13 @@ package models;
 public class Wish {
 
     private int wishId;
-    private String titel;
+    private String title;
     private double price;
     private String description;
 
-    public Wish(int wishId, String titel, double price, String description) {
+    public Wish(int wishId, String title, double price, String description) {
         this.wishId = wishId;
-        this.titel = titel;
+        this.title = title;
         this.price = price;
         this.description = description;
 
@@ -17,20 +17,20 @@ public class Wish {
 
     public Wish(){}
 
-    public int getwishId() {
+    public int getWishId() {
         return wishId;
     }
 
-    public void setId(int id) {
+    public void setId(int wishId) {
         this.wishId = wishId;
     }
 
-    public String getTitel() {
-        return titel;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitel(String titel) {
-        this.titel = titel;
+    public void setTitle(String title) {
+        this.title = title;
 
     }
 
