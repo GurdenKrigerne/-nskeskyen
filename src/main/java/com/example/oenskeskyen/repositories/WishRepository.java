@@ -1,12 +1,13 @@
-package repositories;
+package com.example.oenskeskyen.repositories;
 
-import models.Wish;
+import com.example.oenskeskyen.models.Wish;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class WishRepository {
+
     private final JdbcTemplate jdbcTemplate;
 
     public WishRepository(JdbcTemplate jdbcTemplate) {
@@ -18,7 +19,7 @@ public class WishRepository {
 
     //findWishById
     public Wish findWishById(int wishId) {
-        String sql = "SELECT * FROM wishes WHERE wishId = ?";
+        String sql = "SELECT * FROM Wish WHERE wish_id = ?";
         try {
             return jdbcTemplate.queryForObject(sql, new WishRowMapper(), wishId);
         } catch (EmptyResultDataAccessException e) {
@@ -26,17 +27,29 @@ public class WishRepository {
         }
     }
 
-
     //addWish
 
     //deleteWish
     public boolean deleteWishById(int id) {
-        String sql = "DELETE FROM Wishes WHERE id = ?"; // Fjerner ønsket med det specifikke id
+        String sql = "DELETE FROM Wish WHERE wish_id = ?"; // Fjerner ønsket med det specifikke id
         int rowsAffected = jdbcTemplate.update(sql, id); //returnerer antallet af slettede rækker
         return rowsAffected > 0; // True = slettet, false = ikke fundet
     }
 
-    //editWish
+    // Opdaterer et eksisterende ønske
+    public boolean editWish(Wish wish) {
+        String sql = "UPDATE Wish SET title = ?, price = ?, description = ? WHERE wish_id = ?";
+        int rowsAffected = jdbcTemplate.update(
+                sql,
+                wish.getTitle(),
+                wish.getPrice(),
+                wish.getDescription(),
+                wish.getWishId()
+        );
+        return rowsAffected > 0; // True = opdateret, false = ikke fundet
+    }
+
+
 
 
 
