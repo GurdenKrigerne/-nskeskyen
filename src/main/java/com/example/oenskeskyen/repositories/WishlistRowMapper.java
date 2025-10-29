@@ -1,6 +1,6 @@
-package repositories;
+package com.example.oenskeskyen.repositories;
 
-import models.WishList;
+import com.example.oenskeskyen.models.WishList;
 
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;

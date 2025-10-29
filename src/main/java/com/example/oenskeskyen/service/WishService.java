@@ -1,8 +1,8 @@
-package service;
+package com.example.oenskeskyen.service;
 
-import models.Wish;
+import com.example.oenskeskyen.models.Wish;
 import org.springframework.stereotype.Service;
-import repositories.WishRepository;
+import com.example.oenskeskyen.repositories.WishRepository;
 
 @Service
 public class WishService {
@@ -13,13 +13,20 @@ public class WishService {
         this.wishRepository = wishRepository;
     }
 
-    // FindWishById - Finde et specifikt ønske
+
+    // findWishById - Finde et specifikt ønske
     public Wish findWishById(int id) {
         return wishRepository.findWishById(id);
     }
 
-    //DeleteWishById
+    //deleteWishById
     public boolean deleteWish(int id) {
         return wishRepository.deleteWishById(id);
     }
+
+    //editWish
+    public boolean editWish(Wish wish) {
+        return wishRepository.editWish(wish);
+    }
+
 }
