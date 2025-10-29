@@ -1,6 +1,6 @@
-package repositories;
+package com.example.oenskeskyen.repositories;
 
-import models.User;
+import com.example.oenskeskyen.models.User;
 
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;

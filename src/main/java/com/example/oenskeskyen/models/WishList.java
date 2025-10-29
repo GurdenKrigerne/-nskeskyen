@@ -1,4 +1,4 @@
-package models;
+package com.example.oenskeskyen.models;
 
 import java.util.List;
 

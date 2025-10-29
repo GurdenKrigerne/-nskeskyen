@@ -1,0 +1,70 @@
+package com.example.oenskeskyen.repositories;
+
+import com.example.oenskeskyen.models.Wish;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class WishRepository {
+
+    private final JdbcTemplate jdbcTemplate;
+
+    public WishRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    //getAllWishes
+
+
+    //findWishById
+    public Wish findWishById(int wishId) {
+        String sql = "SELECT * FROM Wish WHERE wish_id = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, new WishRowMapper(), wishId);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    //addWish
+
+    //deleteWish
+    public boolean deleteWishById(int id) {
+        String sql = "DELETE FROM Wish WHERE wish_id = ?"; // Fjerner ønsket med det specifikke id
+        int rowsAffected = jdbcTemplate.update(sql, id); //returnerer antallet af slettede rækker
+        return rowsAffected > 0; // True = slettet, false = ikke fundet
+    }
+
+    // Opdaterer et eksisterende ønske
+    public boolean editWish(Wish wish) {
+        String sql = "UPDATE Wish SET title = ?, price = ?, description = ? WHERE wish_id = ?";
+        int rowsAffected = jdbcTemplate.update(
+                sql,
+                wish.getTitle(),
+                wish.getPrice(),
+                wish.getDescription(),
+                wish.getWishId()
+        );
+        return rowsAffected > 0; // True = opdateret, false = ikke fundet
+    }
+
+    //addWish
+    public int saveWish(Wish wish) {
+        String sql = "INSERT INTO Wish (title, description, price, url) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, wish.getTitle(), wish.getDescription(), wish.getPrice(), wish.getUrl());
+
+        Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        return id;
+    }
+
+    public void linkWishToWishlist(int wishId, int wishlistId) {
+        String sql = "INSERT INTO Wishlist_Wish (wishlist_id, wish_id) VALUES (?, ?)";
+        jdbcTemplate.update(sql, wishId, wishId);
+    }
+
+
+
+
+
+}

@@ -9,7 +9,7 @@
 
 <form th:action="@{/wish/save}" th:object="${wish}" method="post">
   <label for="titel">Titel</label>
-  <input type="text" id="titel" th:field="*{titel}" required><br>
+  <input type="text" id="titel" th:field="*{title}" required><br>
 
     <label for="price">Pris</label>
     <input type="price" id="price" th:field="*{price}"><br>

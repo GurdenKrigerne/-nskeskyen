@@ -1,6 +1,6 @@
-package repositories;
+package com.example.oenskeskyen.repositories;
 
-import models.Wish;
+import com.example.oenskeskyen.models.Wish;
 
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
@@ -11,7 +11,7 @@ public class WishRowMapper implements RowMapper<Wish> {
     public Wish mapRow(ResultSet rs, int rowNum) throws SQLException {
         Wish wish = new Wish();
 
-        wish.setId(rs.getInt("id"));
+        wish.setWishId(rs.getInt("wish_id"));
         wish.setDescription(rs.getString("description"));
         wish.setPrice(rs.getDouble("price"));
         wish.setTitle(rs.getString("title"));
