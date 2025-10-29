@@ -1,8 +1,11 @@
 package com.example.oenskeskyen.repositories;
 
+import com.example.oenskeskyen.models.WishList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class WishlistRepository {
@@ -14,9 +17,16 @@ public class WishlistRepository {
     }
 
     //getAllWishlists
+    public List<WishList> getAllWishlist() {
+        String sql = "SELECT * FROM oenskeskyen.Wishlist";
+        return jdbcTemplate.query(sql, new WishlistRowMapper());
+    }
 
     //findWishlistById
-
+    public WishList getWishListById(int wishlistId) {
+        String sql = "SELECT * FROM oenskeskyen.Wishlist WHERE wishlist_id = ?";
+        return jdbcTemplate.queryForObject(sql, new WishlistRowMapper(), wishlistId);
+    }
     //addWishlist
 
     //deleteWishList

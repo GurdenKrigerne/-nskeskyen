@@ -5,6 +5,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class WishRepository {
 
@@ -15,7 +17,10 @@ public class WishRepository {
     }
 
     //getAllWishes
-
+    public List<Wish> getAllWishes() {
+        String sql = "SELECT * FROM oenskeskyen.Wish";
+        return jdbcTemplate.query(sql, new WishRowMapper());
+    }
 
     //findWishById
     public Wish findWishById(int wishId) {
