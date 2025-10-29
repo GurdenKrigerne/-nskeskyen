@@ -1,4 +1,4 @@
-package com.example.oenskeskyen.models;
+package models;
 
 public class Wish {
 
@@ -6,22 +6,25 @@ public class Wish {
     private String title;
     private double price;
     private String description;
+    private int wishListId;
+    private String url;
 
-    public Wish(int wishId, String title, double price, String description) {
+    public Wish(int wishId, String title, double price, String description, int wishListId, String url) {
         this.wishId = wishId;
         this.title = title;
         this.price = price;
         this.description = description;
-
+        this.wishListId = wishListId;
+        this.url = url;
     }
 
     public Wish(){}
 
-    public int getWishId() {
+    public int getwishId() {
         return wishId;
     }
 
-    public void setWishId(int wishId) {
+    public void setId(int id) {
         this.wishId = wishId;
     }
 
@@ -48,5 +51,22 @@ public class Wish {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    public int getWishListId() {
+        return wishListId;
+    }
+
+    public void setWishListId(int wishListId) {
+        this.wishListId = wishListId;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

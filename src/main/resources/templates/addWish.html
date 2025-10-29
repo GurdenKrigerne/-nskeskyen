@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Tilføj et nyt ønske</h1>
+
+<form th:action="@{/wish/save}" th:object="${wish}" method="post">
+  <label for="titel">Titel</label>
+  <input type="text" id="titel" th:field="*{titel}" required><br>
+
+    <label for="price">Pris</label>
+    <input type="price" id="price" th:field="*{price}"><br>
+
+    <label for="description">Beskrivelse</label>
+    <input type="description" id="description" th:field="*{description}"><br>
+
+    <button type="submit">Tilføj</button>
+</form>
+</body>
+</html>
