@@ -30,7 +30,7 @@ public class WishServiceTest {
     @Test
     public void testFindWishByIdExists() {
         // Simuler et ønske
-        Wish wish = new Wish(1, "Bog", 200.0, "En spændende bog");
+        Wish wish = new Wish(1, "Bog", 200.0, "En spændende bog", 1, "Bog.dk");
 
         // Fortæl mocken, hvad den skal returnere
         when(wishRepository.findWishById(1)).thenReturn(wish);
@@ -59,7 +59,7 @@ public class WishServiceTest {
     @Test
     void testEditWish_Success() {
         // Arrange - lav et dummy wish-objekt
-        Wish wish = new Wish(1, "Ny titel", 250.0, "Opdateret beskrivelse");
+        Wish wish = new Wish(1, "Ny titel", 250.0, "Opdateret beskrivelse", 1, "Bog.dk");
 
         // Mock repository-responsen
         when(wishRepository.editWish(wish)).thenReturn(true);
@@ -70,6 +70,20 @@ public class WishServiceTest {
         // Assert - tjek at den returnerer true og kaldte repository'et
         assertTrue(result);
         verify(wishRepository, times(1)).editWish(wish);
+    }
+
+    @Test
+    void addWish_ShouldCallRepository_WhenWishIsValid() {
+        Wish wish = new Wish();
+        wish.setTitle("Playstation");
+        wish.setDescription("Spillekonsol");
+        wish.setPrice(300.0);
+        wish.setId(1);
+        wish.setWishListId(3);
+
+        wishService.addWishToWishlist(wish, wish.getWishListId());
+
+        verify(wishRepository, times(1)).saveWish(wish);
     }
 
 }

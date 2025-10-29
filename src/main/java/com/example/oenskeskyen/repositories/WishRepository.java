@@ -49,6 +49,20 @@ public class WishRepository {
         return rowsAffected > 0; // True = opdateret, false = ikke fundet
     }
 
+    //addWish
+    public int saveWish(Wish wish) {
+        String sql = "INSERT INTO Wish (title, description, price, url) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, wish.getTitle(), wish.getDescription(), wish.getPrice(), wish.getUrl());
+
+        Integer id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        return id;
+    }
+
+    public void linkWishToWishlist(int wishId, int wishlistId) {
+        String sql = "INSERT INTO Wishlist_Wish (wishlist_id, wish_id) VALUES (?, ?)";
+        jdbcTemplate.update(sql, wishId, wishId);
+    }
+
 
 
 

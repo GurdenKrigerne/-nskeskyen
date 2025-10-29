@@ -67,6 +67,24 @@ public class WishController {
         }
         return "editWish"; // viser samme HTML igen med besked
     }
+
+    @GetMapping("/add/{wishlistId}")
+    public String addWish(@PathVariable int wishlistId, Model model) {
+        model.addAttribute("wish", new Wish());
+        model.addAttribute("wishlistId", wishlistId);
+        return "addWish"; // henviser til templates/addWish.html
+    }
+
+    @PostMapping("/save/{wishlistId}")
+    public String saveWish(@ModelAttribute Wish wish, @PathVariable int wishlistId) {
+        wishService.addWishToWishlist(wish, wishlistId);
+        return "redirect:/wishes/success";
+    }
+
+    @GetMapping("/success")
+    public String successPage() {
+        return "success"; // henviser til templates/success.html
+    }
 }
 
 

@@ -29,4 +29,11 @@ public class WishService {
         return wishRepository.editWish(wish);
     }
 
+    public void addWishToWishlist(Wish wish, int wishlistId) {
+        int wishId = wishRepository.saveWish(wish);
+        if (wishId > 0) {
+            wishRepository.linkWishToWishlist(wishId, wishlistId);
+        }
+    }
+
 }
