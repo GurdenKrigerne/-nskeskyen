@@ -78,7 +78,7 @@ public class WishServiceTest {
         wish.setTitle("Playstation");
         wish.setDescription("Spillekonsol");
         wish.setPrice(300.0);
-        wish.setId(1);
+        wish.setWishId(1);
         wish.setWishListId(3);
 
         wishService.addWishToWishlist(wish, wish.getWishListId());

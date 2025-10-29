@@ -3,8 +3,9 @@ package com.example.oenskeskyen.controller;
 import com.example.oenskeskyen.models.Wish;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
 import com.example.oenskeskyen.service.WishService;
+import org.springframework.web.bind.annotation.*;
+
 
 @Controller
 public class WishController {

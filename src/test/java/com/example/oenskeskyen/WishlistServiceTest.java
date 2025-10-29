@@ -1,10 +1,12 @@
 package com.example.oenskeskyen;
 
+import com.example.oenskeskyen.models.WishList;
 import com.example.oenskeskyen.repositories.WishlistRepository;
 import com.example.oenskeskyen.service.WishlistService;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class WishlistServiceTest {
@@ -26,4 +28,42 @@ public class WishlistServiceTest {
         assertTrue(result);
         verify(mockRepo, times(1)).deleteWishlistById(1);
     }
+
+    @Test
+    void testFindWishlistById_returnsWishlist_whenFound() {
+
+        // Mock test data
+        WishlistRepository mockRepo = Mockito.mock(WishlistRepository.class);
+        WishlistService service = new WishlistService(mockRepo);
+
+        WishList fakeWishlist = new WishList(1, "Fødselsdag", "Ting jeg ønsker mig", null, 1);
+        when(mockRepo.findWishlistById(1)).thenReturn(fakeWishlist);
+
+        // Act (kald metoden vi tester)
+        WishList result = service.findWishlistById(1);
+
+        // Assert (tjek at resultatet er som forventet)
+        assertNotNull(result);
+        assertEquals("Fødselsdag", result.getTitle());
+        verify(mockRepo, times(1)).findWishlistById(1);
+    }
+
+    @Test
+    void testEditWishlist_returnsTrue_whenUpdateSuccessful() {
+        // Arrange
+        WishlistRepository mockRepo = mock(WishlistRepository.class);
+        WishlistService service = new WishlistService(mockRepo);
+
+        WishList wishlist = new WishList(1, "Jul", "Nye ønsker", null, 1);
+        when(mockRepo.editWishlist(wishlist)).thenReturn(true);
+
+        // Act
+        boolean result = service.editWishlist(wishlist);
+
+        // Assert
+        assertTrue(result);
+        verify(mockRepo).editWishlist(wishlist);
+    }
+
+
 }

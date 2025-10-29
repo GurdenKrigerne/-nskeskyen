@@ -1,5 +1,7 @@
 package com.example.oenskeskyen.controller;
 
+import com.example.oenskeskyen.models.WishList;
+import com.example.oenskeskyen.repositories.WishlistRowMapper;
 import com.example.oenskeskyen.service.WishlistService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,22 @@ public class WishlistsController {
 
    public WishlistsController(WishlistService wishlistService) {
        this.wishlistService = wishlistService;
+   }
+
+
+
+   //findWishlistById
+   @GetMapping("/wishlists/{id}")
+   public String showWishlist(@PathVariable int id, Model model) {
+       WishList wishlist = wishlistService.findWishlistById(id);
+
+       if (wishlist == null) {
+           model.addAttribute("errorMessage", "Ønskelisten med ID " + id + " findes ikke.");
+           return "findWishlistById"; // viser fejl
+       }
+
+       model.addAttribute("wishlist", wishlist);
+       return "findWishlistById"; // viser HTML-side med ønskelisten
    }
 
 
@@ -36,6 +54,18 @@ public class WishlistsController {
         }
 
         return "deleteWishlist";
+    }
+
+    // REDIGER ØNSKELIST
+    @GetMapping("/wishlists/edit/{id}")
+    public String showEditForm(@PathVariable int id, Model model) {
+        WishList wishlist = wishlistService.findWishlistById(id);
+        if (wishlist == null) {
+            model.addAttribute("errorMessage", "Ønskelisten med ID " + id + " findes ikke.");
+            return "editWishlist";
+        }
+        model.addAttribute("wishlist", wishlist); // <-- vigtigt: navnet "wishlist" matcher th:object="${wishlist}"
+        return "editWishlist";
     }
 }
 

@@ -1,4 +1,4 @@
-package models;
+package com.example.oenskeskyen.models;
 
 public class Wish {
 
@@ -20,11 +20,11 @@ public class Wish {
 
     public Wish(){}
 
-    public int getwishId() {
+    public int getWishId() {
         return wishId;
     }
 
-    public void setId(int id) {
+    public void setWishId(int id) {
         this.wishId = wishId;
     }
 

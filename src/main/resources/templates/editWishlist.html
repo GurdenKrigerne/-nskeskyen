@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rediger Ønskeliste</title>
+</head>
+<body>
+<h1>Rediger Ønskeliste</h1>
+
+<!-- Hvis der er fejl -->
+<div th:if="${errorMessage != null}">
+    <p th:text="${errorMessage}"></p>
+</div>
+
+<!-- Rediger formular -->
+<form th:action="@{/wishlists/edit}" th:object="${wishlist}" method="post">
+    <input type="hidden" th:field="*{wishlistId}">
+
+    <label for="title">Titel:</label><br>
+    <input type="text" id="title" th:field="*{title}" required><br><br>
+
+    <label for="description">Beskrivelse:</label><br>
+    <textarea id="description" th:field="*{description}" rows="4" cols="40"></textarea><br><br>
+
+    <button type="submit">Gem ændringer</button>
+</form>
+
+<!-- Hvis der er besked -->
+<div th:if="${message != null}">
+    <p th:text="${message}"></p>
+</div>
+
+<a href="/wishlists">Tilbage til ønskelister</a>
+</body>
+</html>

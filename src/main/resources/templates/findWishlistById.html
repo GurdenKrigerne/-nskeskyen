@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ønskeliste detaljer</title>
+</head>
+<body>
+<h1>Detaljer for Ønskeliste</h1>
+
+<!-- Hvis wishlist findes -->
+<div th:if="${wishlist != null}">
+    <p><strong>ID:</strong> <span th:text="${wishlist.wishlistId}"></span></p>
+    <p><strong>Titel:</strong> <span th:text="${wishlist.title}"></span></p>
+    <p><strong>Beskrivelse:</strong> <span th:text="${wishlist.description}"></span></p>
+
+    <h3>Ønsker i listen:</h3>
+    <ul>
+        <li th:each="wish : ${wishlist.wishes}">
+            <strong th:text="${wish.title}"></strong> –
+            <span th:text="${wish.price}"></span> kr
+            <p th:text="${wish.description}"></p>
+        </li>
+    </ul>
+</div>
+
+<!-- Hvis der er fejlbesked -->
+<div th:if="${errorMessage != null}">
+    <p style="color:red" th:text="${errorMessage}"></p>
+</div>
+
+<a href="/wishlists">Tilbage til alle ønskelister</a>
+</body>
+</html>

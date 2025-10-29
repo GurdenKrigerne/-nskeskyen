@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public class WishlistRepository {
 
@@ -17,16 +15,13 @@ public class WishlistRepository {
     }
 
     //getAllWishlists
-    public List<WishList> getAllWishlist() {
-        String sql = "SELECT * FROM oenskeskyen.Wishlist";
-        return jdbcTemplate.query(sql, new WishlistRowMapper());
-    }
 
     //findWishlistById
-    public WishList getWishListById(int wishlistId) {
-        String sql = "SELECT * FROM oenskeskyen.Wishlist WHERE wishlist_id = ?";
+    public WishList findWishlistById(int wishlistId) {
+        String sql = "SELECT * FROM Wishlist WHERE wishlist_id = ?";
         return jdbcTemplate.queryForObject(sql, new WishlistRowMapper(), wishlistId);
     }
+
     //addWishlist
 
     //deleteWishList
@@ -39,7 +34,18 @@ public class WishlistRepository {
 
 
     //editWishlist
+    public boolean editWishlist(WishList wishlist) {
+        String sql = "UPDATE Wishlist SET name = ?, description = ? WHERE wishlist_id = ?";
+        int rows = jdbcTemplate.update(sql,
+                wishlist.getTitle(),
+                wishlist.getDescription(),
+                wishlist.getWishlistId());
+        return rows > 0;
+    }
 
     //addWishToWishlist
+
+
+
 }
 
