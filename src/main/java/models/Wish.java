@@ -3,16 +3,19 @@ package models;
 public class Wish {
 
     private int wishId;
-    private String titel;
+    private String title;
     private double price;
     private String description;
+    private int wishListId;
+    private String url;
 
-    public Wish(int wishId, String titel, double price, String description) {
+    public Wish(int wishId, String title, double price, String description, int wishListId, String url) {
         this.wishId = wishId;
-        this.titel = titel;
+        this.title = title;
         this.price = price;
         this.description = description;
-
+        this.wishListId = wishListId;
+        this.url = url;
     }
 
     public Wish(){}
@@ -25,12 +28,12 @@ public class Wish {
         this.wishId = wishId;
     }
 
-    public String getTitel() {
-        return titel;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitel(String titel) {
-        this.titel = titel;
+    public void setTitle(String title) {
+        this.title = title;
 
     }
 
@@ -48,5 +51,22 @@ public class Wish {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    public int getWishListId() {
+        return wishListId;
+    }
+
+    public void setWishListId(int wishListId) {
+        this.wishListId = wishListId;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
