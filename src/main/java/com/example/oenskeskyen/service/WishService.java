@@ -1,6 +1,7 @@
 package com.example.oenskeskyen.service;
 
 import com.example.oenskeskyen.models.Wish;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import com.example.oenskeskyen.repositories.WishRepository;
 
@@ -8,9 +9,11 @@ import com.example.oenskeskyen.repositories.WishRepository;
 public class WishService {
 
     private final WishRepository wishRepository;
+    private final JdbcTemplate jdbcTemplate;
 
-    public WishService(WishRepository wishRepository) {
+    public WishService(WishRepository wishRepository, JdbcTemplate jdbcTemplate) {
         this.wishRepository = wishRepository;
+        this.jdbcTemplate = jdbcTemplate;
     }
 
 
@@ -30,10 +33,13 @@ public class WishService {
     }
 
     public void addWishToWishlist(Wish wish, int wishlistId) {
-        int wishId = wishRepository.saveWish(wish);
-        if (wishId > 0) {
-            wishRepository.linkWishToWishlist(wishId, wishlistId);
-        }
-    }
+        System.out.println("Gemmer nyt wish i databasen...");
+        wishRepository.saveWish(wish);
 
+        // Hent sidste indsatte ID
+        int wishId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        System.out.println("Ny wish_id = " + wishId + ", linker til wishlist_id = " + wishlistId);
+
+        wishRepository.linkWishToWishlist(wishId, wishlistId);
+    }
 }

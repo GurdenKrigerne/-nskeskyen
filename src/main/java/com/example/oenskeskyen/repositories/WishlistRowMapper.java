@@ -16,7 +16,7 @@ public class WishlistRowMapper implements RowMapper<WishList> {
                 wishList.setTitle(rs.getString("title")); // Ønskelistens titel
                 wishList.setDescription(rs.getString("description")); // Beskrivelse af ønskelistens indhold
                 wishList.setUserId(rs.getInt("userId")); // Hvilken bruger ejeren er
-                wishList.setWishes(null);
+
 
                 return wishList;
     }

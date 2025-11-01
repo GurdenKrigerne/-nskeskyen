@@ -23,6 +23,10 @@ public class WishlistRepository {
     }
 
     //addWishlist
+    public void createWishlist(WishList wishlist) {
+        String sql = "INSERT INTO Wishlist (name, description, owner_id) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql, wishlist.getTitle(), wishlist.getDescription(), wishlist.getUserId());
+    }
 
     //deleteWishList
     public boolean deleteWishlistById(int id) {

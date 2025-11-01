@@ -6,16 +6,14 @@ public class WishList {
     private int wishlistId;
     private String title;
     private String description;
-    private List<Wish> wishes;
     private int userId;
 
     public WishList(){}
 
-    public WishList(int wishlistId, String title, String description, List<Wish> wishes, int userId) {
+    public WishList(int wishlistId, String title, String description, int userId) {
         this.wishlistId = wishlistId;
         this.title = title;
         this.description = description;
-        this.wishes = wishes;
         this.userId = userId;
     }
 
@@ -43,13 +41,6 @@ public class WishList {
         this.description = description;
     }
 
-    public List<Wish> getWishes() {
-        return wishes;
-    }
-
-    public void setWishes(List<Wish> wishes) {
-        this.wishes = wishes;
-    }
 
     public int getUserId() {
         return userId;

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.example.oenskeskyen.repositories.WishRepository;
 import com.example.oenskeskyen.service.WishService;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
@@ -24,7 +25,7 @@ public class WishServiceTest {
         wishRepository = mock(WishRepository.class);
 
         // Inject mocken ind i service
-        wishService = new WishService(wishRepository);
+        wishService = new WishService(wishRepository, new JdbcTemplate());
     }
 
     @Test

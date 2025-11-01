@@ -29,4 +29,8 @@ public class WishlistService {
         return wishlistRepository.editWishlist(wishlist);
     }
 
+    public void createWishlist(WishList wishlist) {
+        wishlistRepository.createWishlist(wishlist);
+    }
+
 }

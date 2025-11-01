@@ -6,6 +6,7 @@ import com.example.oenskeskyen.service.WishlistService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -66,6 +67,20 @@ public class WishlistsController {
         }
         model.addAttribute("wishlist", wishlist); // <-- vigtigt: navnet "wishlist" matcher th:object="${wishlist}"
         return "editWishlist";
+    }
+    @GetMapping("/wishlist/add/{ownerId}")
+    public String addWishlist(@PathVariable int ownerId, Model model) {
+        model.addAttribute("wishlist", new WishList());
+        model.addAttribute("ownerId", ownerId);
+        return "addWishlist"; // refererer til templates/addWishlist.html
+    }
+
+    // Gemmer ønskelisten i databasen
+    @PostMapping("/wishlist/save/{ownerId}")
+    public String saveWishlist(@ModelAttribute WishList wishlist, @PathVariable int ownerId) {
+        wishlist.setUserId(ownerId);
+        wishlistService.createWishlist(wishlist);
+        return "redirect:/wishlist/add/{ownerId}";
     }
 }
 

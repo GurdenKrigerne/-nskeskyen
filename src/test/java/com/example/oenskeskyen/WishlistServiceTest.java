@@ -36,7 +36,7 @@ public class WishlistServiceTest {
         WishlistRepository mockRepo = Mockito.mock(WishlistRepository.class);
         WishlistService service = new WishlistService(mockRepo);
 
-        WishList fakeWishlist = new WishList(1, "Fødselsdag", "Ting jeg ønsker mig", null, 1);
+        WishList fakeWishlist = new WishList(1, "Fødselsdag", "Ting jeg ønsker mig", 1);
         when(mockRepo.findWishlistById(1)).thenReturn(fakeWishlist);
 
         // Act (kald metoden vi tester)
@@ -54,7 +54,7 @@ public class WishlistServiceTest {
         WishlistRepository mockRepo = mock(WishlistRepository.class);
         WishlistService service = new WishlistService(mockRepo);
 
-        WishList wishlist = new WishList(1, "Jul", "Nye ønsker", null, 1);
+        WishList wishlist = new WishList(1, "Jul", "Nye ønsker", 1);
         when(mockRepo.editWishlist(wishlist)).thenReturn(true);
 
         // Act
