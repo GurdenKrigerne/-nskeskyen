@@ -4,6 +4,8 @@ import com.example.oenskeskyen.models.WishList;
 import com.example.oenskeskyen.repositories.WishlistRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class WishlistService {
 
@@ -14,15 +16,23 @@ public class WishlistService {
     }
 
 
+    //getAllWishlists
+    public List<WishList> getAllWishlists() {
+        return wishlistRepository.getAllWishlists();
+    }
+
+
     //findWishlistById
     public WishList findWishlistById(int id) {
         return wishlistRepository.findWishlistById(id);
     }
 
+
     //deleteWishlist
     public boolean deleteWishlist(int id) {
         return wishlistRepository.deleteWishlistById(id);
     }
+
 
     //editWishlist
     public boolean editWishlist(WishList wishlist) {
@@ -31,6 +41,12 @@ public class WishlistService {
 
     public void createWishlist(WishList wishlist) {
         wishlistRepository.createWishlist(wishlist);
+    }
+
+
+    //addWishToWishlists
+    public void addWishToWishlist(int wishlistId, int wishId) {
+        wishlistRepository.addWishToWishlist(wishlistId, wishId);
     }
 
 }

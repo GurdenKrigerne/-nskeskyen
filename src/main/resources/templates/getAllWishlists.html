@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ønskelister</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Alle Ønskelister</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Navn</th>
+            <th>Beskrivelse</th>
+            <th>Ejer ID</th>
+            <th>Oprettet</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="wishlist : ${wishlists}">
+            <td th:text="${wishlist.wishlistId}"></td>
+            <td th:text="${wishlist.name}"></td>
+            <td th:text="${wishlist.description}"></td>
+            <td th:text="${wishlist.ownerId}"></td>
+            <td th:text="${wishlist.createdAt}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/">← Tilbage til forsiden</a>
+</div>
+</body>
+</html>

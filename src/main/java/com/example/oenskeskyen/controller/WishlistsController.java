@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class WishlistsController {
@@ -19,6 +22,14 @@ public class WishlistsController {
        this.wishlistService = wishlistService;
    }
 
+
+   //getAllWishlists
+   @GetMapping("/wishlists")
+   public String getAllWishlists(Model model) {
+       List<WishList> wishlists = wishlistService.getAllWishlists();
+       model.addAttribute("wishlists", wishlists);
+       return "getAllWishlists"; // wishlists.html i templates
+   }
 
 
    //findWishlistById
@@ -81,6 +92,14 @@ public class WishlistsController {
         wishlist.setUserId(ownerId);
         wishlistService.createWishlist(wishlist);
         return "redirect:/wishlist/add/{ownerId}";
+    }
+
+
+    //addWishToWishlist
+    @PostMapping("/{wishlistId}/addWish")
+    public String addWishToWishlist(@PathVariable int wishlistId, @RequestParam int wishId) {
+        wishlistService.addWishToWishlist(wishlistId, wishId);
+        return "redirect:/getAllWishlists";
     }
 }
 

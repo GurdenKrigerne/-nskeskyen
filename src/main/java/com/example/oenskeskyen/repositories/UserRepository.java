@@ -18,12 +18,12 @@ public class UserRepository {
 
     //getAllUsers
     public List<User> getAllUsers() {
-        String sql = "SELECT * FROM oenskeskyen.Users";
+        String sql = "SELECT * FROM Users";
         return jdbcTemplate.query(sql, new UserRowMapper());
     }
-    //findById
-    public User findById(int userId) {
-        String sql = "SELECT * FROM oenskeskyen.Users WHERE user_id = ?";
+    //findUserById
+    public User findUserById(int userId) {
+        String sql = "SELECT * FROM Users WHERE user_id = ?";
         return jdbcTemplate.queryForObject(sql, new UserRowMapper(), userId);
     }
 

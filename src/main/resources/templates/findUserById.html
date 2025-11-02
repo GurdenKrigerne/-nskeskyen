@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Brugerprofil</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Brugerprofil</h1>
+
+    <div class="card">
+        <p><strong>ID:</strong> <span th:text="${user.userId}"></span></p>
+        <p><strong>Navn:</strong> <span th:text="${user.name}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+        <p><strong>Kodeord (hash):</strong> <span th:text="${user.password}"></span></p>
+    </div>
+
+    <a href="/users">← Tilbage til brugerliste</a>
+</div>
+</body>
+</html>
