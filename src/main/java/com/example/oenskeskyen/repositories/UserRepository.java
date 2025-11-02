@@ -32,10 +32,19 @@ public class UserRepository {
         return jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPassword());
     }
 
-
     //editUser
+    public boolean editUser(User user) {
+        String sql = "UPDATE Users SET email = ?, password = ? WHERE user_id = ?";
+        int rowsAffected = jdbcTemplate.update(sql, user.getEmail(), user.getPassword(), user.getUserId() > 0);
+        return rowsAffected > 0;
+    }
 
     //deleteUser
+    public boolean deleteUserById(int userId) {
+        String sql = "DELETE FROM Users WHERE user_id = ?";
+        int rowsAffected = jdbcTemplate.update(sql, userId);
+        return  rowsAffected > 0;
+    }
 
 
 }

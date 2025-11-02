@@ -4,8 +4,7 @@ import com.example.oenskeskyen.models.User;
 import com.example.oenskeskyen.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,7 +25,6 @@ public class UserController {
         return "allUsers"; // henviser til allUsers.html
     }
 
-
     //findUserById
     @GetMapping("/users/{id}")
     public String getUserById(@PathVariable("id") int userId, Model model) {
@@ -34,5 +32,32 @@ public class UserController {
         model.addAttribute("user", user);
         return "findUserById"; // user-detail.html i templates
     }
+
+    //add user
+    @PostMapping("/addUser")
+    public String addUser(@ModelAttribute User user) {
+        userService.addUser(user);
+        return "redirect:/users";
+    }
+    @GetMapping("/addUser")
+    public String showAddUserForm(Model model) {
+        model.addAttribute("user", new User());
+        return "addUser";
+    }
+
+    //edit user
+    @PutMapping("/edit")
+    public String editUser(@ModelAttribute User user) {
+        userService.editUser(user);
+        return "redirect:/users";
+    }
+
+    //delete user
+    @DeleteMapping("/delete")
+    public String deleteUserById(@RequestParam int userId) {
+        userService.deleteUserById(userId);
+        return "redirect:/users";
+    }
+
 
 }

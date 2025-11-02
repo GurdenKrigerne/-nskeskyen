@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import com.example.oenskeskyen.service.WishService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Controller
 public class WishController {
@@ -16,6 +18,11 @@ public class WishController {
         this.wishService = wishService;
     }
 
+    @GetMapping("/wishes")
+    public String getAllWishes (Model model) {
+        List<Wish> wishes = wishService.getAllWishes();
+        return "getAllWishes";
+    }
     // GET /wishes/{id} - Hent et specifikt ønske
     @GetMapping("/wishes/{id}")
     public String showWish(@PathVariable int id, Model model) {
@@ -84,6 +91,7 @@ public class WishController {
         wishService.addWishToWishlist(wish, wishlistId);
         return "redirect:/wishes/add/" + wishlistId;
     }
+
 
 }
 

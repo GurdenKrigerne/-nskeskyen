@@ -23,11 +23,18 @@ public class UserService {
         return userRepository.getAllUsers();
     }
 
-
     //findUserById
     public User findUserById(int userId) {
         return userRepository.findUserById(userId);
     }
 
+    //Add user
+    public int addUser(User user) { return userRepository.addUser(user); }
+
+    //edit User
+    public boolean editUser(User user) { return userRepository.editUser(user); }
+
+    //delete user
+    public boolean deleteUserById(int userId) { return userRepository.deleteUserById(userId); }
 
 }
