@@ -7,6 +7,8 @@ import com.example.oenskeskyen.repositories.WishRepository;
 import com.example.oenskeskyen.service.WishService;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
@@ -31,7 +33,8 @@ public class WishServiceTest {
     @Test
     public void testFindWishByIdExists() {
         // Simuler et ønske
-        Wish wish = new Wish(1, "Bog", 200.0, "En spændende bog", 1, "Bog.dk");
+        Wish wish = new Wish(1, "AirPods Pro", 1999.00, "Trådløse høretelefoner fra Apple", 1, "apple.com");
+
 
         // Fortæl mocken, hvad den skal returnere
         when(wishRepository.findWishById(1)).thenReturn(wish);
@@ -41,7 +44,7 @@ public class WishServiceTest {
 
         // Tjek resultaterne
         assertNotNull(result);                  // Ønsket skal ikke være null
-        assertEquals("Bog", result.getTitle()); // Titlen skal være "Bog"
+        assertEquals("AirPods Pro", result.getTitle()); // Titlen skal være "Bog"
 
         // Tjek at repository-metoden blev kaldt præcis én gang
         verify(wishRepository, times(1)).findWishById(1);
@@ -60,7 +63,9 @@ public class WishServiceTest {
     @Test
     void testEditWish_Success() {
         // Arrange - lav et dummy wish-objekt
-        Wish wish = new Wish(1, "Ny titel", 250.0, "Opdateret beskrivelse", 1, "Bog.dk");
+        Wish wish = new Wish(1, "AirPods Pro", 1999.00, "Trådløse høretelefoner fra Apple", 1, "apple.com");
+
+
 
         // Mock repository-responsen
         when(wishRepository.editWish(wish)).thenReturn(true);
@@ -75,6 +80,17 @@ public class WishServiceTest {
 
     @Test
     void addWish_ShouldCallRepository_WhenWishIsValid() {
+        // Mock JdbcTemplate
+        JdbcTemplate jdbcTemplate = mock(JdbcTemplate.class);
+        when(jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class)).thenReturn(1);
+
+        // Mock repository
+        WishRepository wishRepository = mock(WishRepository.class);
+
+        // Service med mocks
+        WishService wishService = new WishService(wishRepository, jdbcTemplate);
+
+        // Arrange
         Wish wish = new Wish();
         wish.setTitle("Playstation");
         wish.setDescription("Spillekonsol");
@@ -82,11 +98,14 @@ public class WishServiceTest {
         wish.setWishId(1);
         wish.setWishListId(3);
 
+        // Act
         wishService.addWishToWishlist(wish, wish.getWishListId());
 
+        // Assert
         verify(wishRepository, times(1)).saveWish(wish);
-    }
+        verify(wishRepository, times(1)).linkWishToWishlist(1, 3); // tjekker linkWishToWishlist også
 
+    }
 }
 
 

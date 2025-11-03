@@ -1,5 +1,8 @@
 package com.example.oenskeskyen.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Wish {
 
     private int wishId;
@@ -9,6 +12,7 @@ public class Wish {
     private int wishListId;
     private String url;
 
+
     public Wish(int wishId, String title, double price, String description, int wishListId, String url) {
         this.wishId = wishId;
         this.title = title;
@@ -16,16 +20,18 @@ public class Wish {
         this.description = description;
         this.wishListId = wishListId;
         this.url = url;
+
     }
 
-    public Wish(){}
+    public Wish() {
+    }
 
     public int getWishId() {
         return wishId;
     }
 
     public void setWishId(int id) {
-        this.wishId = wishId;
+        this.wishId = id;
     }
 
     public String getTitle() {
@@ -69,4 +75,5 @@ public class Wish {
     public void setUrl(String url) {
         this.url = url;
     }
+
 }

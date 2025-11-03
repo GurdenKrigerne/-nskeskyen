@@ -1,105 +1,57 @@
-/* === Generelle styles === */
 body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(to right, #6a11cb, #2575fc);
-    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #c7e8ff, #e0f7fa);
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-/* === Login-container === */
-.login-container, .main-container {
+.login-container {
     background: white;
-    padding: 40px 60px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 400px;
     text-align: center;
-    width: 350px;
 }
 
-/* === Hovedside container === */
-.main-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* === Overskrifter === */
-.login-title, .main-title {
+h1 {
+    color: #0077b6;
     margin-bottom: 25px;
-    color: #333;
 }
 
-/* === Formular input === */
-.login-form, .wish-form {
+.form-box {
     display: flex;
     flex-direction: column;
-}
-
-.form-label {
-    text-align: left;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-}
-
-.form-input {
-    padding: 10px;
     margin-bottom: 20px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 16px;
 }
 
-/* === Knapper === */
-.btn {
-    padding: 12px;
+input {
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+button {
+    background-color: #0077b6;
+    color: white;
     border: none;
     border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.login-btn {
-    background-color: #2575fc;
-    color: white;
-}
-
-.login-btn:hover {
-    background-color: #6a11cb;
-}
-
-.action-btn {
-    background-color: #2575fc;
-    color: white;
-    margin: 5px 0;
-}
-
-.action-btn:hover {
-    background-color: #6a11cb;
-}
-
-.logout-btn {
-    background-color: #ff4b5c;
-}
-
-.logout-btn:hover {
-    background-color: #ff1f3d;
-}
-
-/* === Fejlmeddelelse === */
-.error-msg {
-    color: red;
+    padding: 10px;
     margin-top: 10px;
-    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
-/* === Knap gruppe på hovedsiden === */
-.button-group {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+button:hover {
+    background-color: #005f8d;
+}
+
+.divider {
+    height: 2px;
+    background-color: #e0e0e0;
+    margin: 25px 0;
 }

@@ -14,13 +14,15 @@
     <p><strong>Beskrivelse:</strong> <span th:text="${wishlist.description}"></span></p>
 
     <h3>Ønsker i listen:</h3>
-    <ul>
+    <!-- Tjek at wishes ikke er null og ikke tom -->
+    <ul th:if="${wishlist.wishes != null and #lists.isNotEmpty(wishlist.wishes)}">
         <li th:each="wish : ${wishlist.wishes}">
             <strong th:text="${wish.title}"></strong> –
             <span th:text="${wish.price}"></span> kr
             <p th:text="${wish.description}"></p>
         </li>
     </ul>
+    <p th:if="${wishlist.wishes == null or #lists.isEmpty(wishlist.wishes)}">Der er ingen ønsker i denne ønskeliste.</p>
 </div>
 
 <!-- Hvis der er fejlbesked -->

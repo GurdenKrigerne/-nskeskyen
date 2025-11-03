@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ønskesky - Login / Opret bruger</title>
+</head>
+<body>
+<h1>Velkommen til Ønskesky</h1>
+
+<!-- Login form -->
+<h2>Login</h2>
+<form th:action="@{/login}" method="post">
+    <label>Email:</label>
+    <input type="email" name="email" required>
+    <br>
+    <label>Password:</label>
+    <input type="password" name="password" required>
+    <br>
+    <button type="submit">Login</button>
+</form>
+<div th:if="${loginError != null}" style="color:red;" th:text="${loginError}"></div>
+
+<hr>
+
+<!-- Register form -->
+<h2>Opret bruger</h2>
+<form th:action="@{/register}" method="post">
+    <label>Navn:</label>
+    <input type="text" name="name" required>
+    <br>
+    <label>Email:</label>
+    <input type="email" name="email" required>
+    <br>
+    <label>Password:</label>
+    <input type="password" name="password" required>
+    <br>
+    <button type="submit">Opret bruger</button>
+</form>
+<div th:if="${registerError != null}" style="color:red;" th:text="${registerError}"></div>
+<div th:if="${registerSuccess != null}" style="color:green;" th:text="${registerSuccess}"></div>
+</body>
+</html>

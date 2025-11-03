@@ -32,7 +32,6 @@ public class WishRepository {
         }
     }
 
-    //addWish
 
     //deleteWish
     public boolean deleteWishById(int id) {

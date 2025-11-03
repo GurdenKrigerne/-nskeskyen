@@ -1,5 +1,6 @@
 package com.example.oenskeskyen.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WishList {
@@ -7,6 +8,7 @@ public class WishList {
     private String title;
     private String description;
     private int userId;
+    private List<Wish> wishes;
 
     public WishList(){}
 
@@ -15,6 +17,7 @@ public class WishList {
         this.title = title;
         this.description = description;
         this.userId = userId;
+        this.wishes = new ArrayList<>();
     }
 
     public int getWishlistId() {
@@ -49,4 +52,7 @@ public class WishList {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+    public List<Wish> getWishes() { return wishes; }
+    public void setWishes(List<Wish> wishes) { this.wishes = wishes; }
 }
