@@ -5,6 +5,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import com.example.oenskeskyen.repositories.WishRepository;
 
+import java.util.List;
+
 @Service
 public class WishService {
 
@@ -42,4 +44,5 @@ public class WishService {
 
         wishRepository.linkWishToWishlist(wishId, wishlistId);
     }
+    public List<Wish> getAllWishes() { return wishRepository.getAllWishes(); }
 }

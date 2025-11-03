@@ -29,22 +29,5 @@ public class UserService {
         return userRepository.findUserById(userId);
     }
 
-    // Login-metode
-    public boolean login(String email, String password) {
-        User user = userRepository.findByEmail(email);
-        return user != null && user.getPassword().equals(password);
-    }
 
-    // Opret bruger
-    public void register(User user) {
-        userRepository.save(user);
-    }
-
-    // Hent bruger ved email
-    public User getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
 }
-
-
-
