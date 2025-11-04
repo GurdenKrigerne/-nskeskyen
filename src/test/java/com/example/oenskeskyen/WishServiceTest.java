@@ -1,6 +1,7 @@
 package com.example.oenskeskyen;
 
 import com.example.oenskeskyen.models.Wish;
+import com.example.oenskeskyen.service.WishlistService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.example.oenskeskyen.repositories.WishRepository;
@@ -20,6 +21,7 @@ public class WishServiceTest {
 
     private WishRepository wishRepository;
     private WishService wishService;
+    private WishlistService wishlistService;
 
     @BeforeEach
     public void setup() {
@@ -27,7 +29,7 @@ public class WishServiceTest {
         wishRepository = mock(WishRepository.class);
 
         // Inject mocken ind i service
-        wishService = new WishService(wishRepository, new JdbcTemplate());
+        wishService = new WishService(wishRepository, wishlistService, new JdbcTemplate());
     }
 
     @Test

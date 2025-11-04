@@ -58,6 +58,11 @@ public class WishlistRepository {
         String sql = "INSERT INTO Wishlist_Wish (wishlist_id, wish_id) VALUES (?, ?)";
         return jdbcTemplate.update(sql, wishlistId, wishId);
     }
+
+    public String getWishlistNameById(int wishlistId) {
+        String sql = "SELECT name FROM Wishlist WHERE wishlist_id = ?";
+        return jdbcTemplate.queryForObject(sql, String.class, wishlistId);
+    }
 }
 
 
