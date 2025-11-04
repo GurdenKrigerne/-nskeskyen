@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ønsker på listen</title>
+</head>
+<body>
+<h1 th:text="${wishlistName}">Ønskeliste</h1>
+
+<ul>
+    <li th:each="wish : ${wishes}">
+        <a th:href="@{'/wishes/' + ${wish.wishId}}" th:text="${wish.title}"></a>
+    </li>
+</ul>
+</body>
+</html>

@@ -92,6 +92,18 @@ public class WishController {
         return "redirect:/wishes/add/" + wishlistId;
     }
 
+    @GetMapping("/wishes/list/{wishlistId}")
+    public String viewWishesByWishlist(@PathVariable int wishlistId, Model model) {
+        List<Wish> wishes = wishService.getWishesByWishlistId(wishlistId);
+        String wishlistName = wishService.getWishlistNameById(wishlistId);
+        model.addAttribute("wishes", wishes);
+        model.addAttribute("wishlistName", wishlistName);
+        model.addAttribute("wishlistId", wishlistId);
+        return "wishesList";
+    }
+
+
+
 
 }
 

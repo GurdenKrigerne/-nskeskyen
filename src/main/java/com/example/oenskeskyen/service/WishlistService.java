@@ -49,4 +49,8 @@ public class WishlistService {
         wishlistRepository.addWishToWishlist(wishlistId, wishId);
     }
 
+    public String getWishlistNameById(int wishlistId) {
+        return wishlistRepository.getWishlistNameById(wishlistId);
+    }
+
 }

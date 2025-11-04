@@ -66,6 +66,15 @@ public class WishRepository {
     }
 
 
+    public List<Wish> getWishesByWishlistId(int wishlidtId) {
+        String sql = "SELECT w.wish_id, w.title, w.description, w.price, w.url " +
+                "FROM Wish w " +
+                "JOIN Wishlist_Wish ww ON w.wish_id = ww.wish_id " +
+                "WHERE ww.wishlist_id = ?";
+        return jdbcTemplate.query(sql, new WishRowMapper(), wishlidtId);
+    }
+
+
 
 
 
