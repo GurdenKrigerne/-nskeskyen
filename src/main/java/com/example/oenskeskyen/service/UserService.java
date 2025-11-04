@@ -29,5 +29,20 @@ public class UserService {
         return userRepository.findUserById(userId);
     }
 
+    //add user
+    public int addUser(User user) {
+        return userRepository.addUser(user);
+    }
+
+    //edituser
+    public boolean editUser(User user) {
+        return userRepository.editUser(user);
+    }
+
+    //delete user
+    public boolean deleteUser(int userId) {
+        return userRepository.deleteUserById(userId);
+    }
+
 
 }

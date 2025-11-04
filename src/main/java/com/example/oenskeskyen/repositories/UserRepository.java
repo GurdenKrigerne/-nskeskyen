@@ -34,8 +34,21 @@ public class UserRepository {
 
 
     //editUser
-
+    public boolean editUser(User user) {
+        String sql = "UPDATE Users SET email = ?, password = ? WHERE user_id = ?";
+        int rows = jdbcTemplate.update(sql,
+                user.getEmail(),
+                user.getPassword(),
+                user.getUserId()
+        );
+        return rows > 0;
+    }
     //deleteUser
+    public boolean deleteUserById(int userId) {
+        String sql = "DELETE FROM Users WHERE user_id = ?";
+        int rows = jdbcTemplate.update(sql, userId);
+        return rows > 0;
+    }
 
 
 }
