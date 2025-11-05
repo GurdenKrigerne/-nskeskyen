@@ -23,6 +23,7 @@ public class WishController {
         List<Wish> wishes = wishService.getAllWishes();
         return "getAllWishes";
     }
+
     // GET /wishes/{id} - Hent et specifikt ønske
     @GetMapping("/wishes/{id}")
     public String showWish(@PathVariable int id, Model model) {
@@ -101,9 +102,6 @@ public class WishController {
         model.addAttribute("wishlistId", wishlistId);
         return "wishesList";
     }
-
-
-
 
 }
 

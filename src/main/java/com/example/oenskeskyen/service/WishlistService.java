@@ -15,24 +15,20 @@ public class WishlistService {
         this.wishlistRepository = wishlistRepository;
     }
 
-
     //getAllWishlists
     public List<WishList> getAllWishlists() {
         return wishlistRepository.getAllWishlists();
     }
-
 
     //findWishlistById
     public WishList findWishlistById(int id) {
         return wishlistRepository.findWishlistById(id);
     }
 
-
     //deleteWishlist
     public boolean deleteWishlist(int id) {
         return wishlistRepository.deleteWishlistById(id);
     }
-
 
     //editWishlist
     public boolean editWishlist(WishList wishlist) {
@@ -42,7 +38,6 @@ public class WishlistService {
     public void createWishlist(WishList wishlist) {
         wishlistRepository.createWishlist(wishlist);
     }
-
 
     //addWishToWishlists
     public void addWishToWishlist(int wishlistId, int wishId) {

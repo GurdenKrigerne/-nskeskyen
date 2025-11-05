@@ -70,7 +70,7 @@ public class UserController {
         int rows = userService.addUser(user); // kalder service/repository
 
         if (rows > 0) {
-            return "redirect:/users"; // tilbage til user list hvis succes
+            return "redirect:/main/" + user.getUserId(); // tilbage til user list hvis succes
         } else {
             return "error"; // alternativ error side
         }

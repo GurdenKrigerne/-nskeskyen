@@ -39,7 +39,7 @@ public class WishlistsController {
 
        if (wishlist == null) {
            model.addAttribute("errorMessage", "Ønskelisten med ID " + id + " findes ikke.");
-           return "findWishlistById"; // viser fejl
+           return "findWishlistById";
        }
 
        model.addAttribute("wishlist", wishlist);

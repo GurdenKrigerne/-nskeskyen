@@ -14,6 +14,7 @@
     <p><strong>Beskrivelse:</strong> <span th:text="${wishlist.description}"></span></p>
 
     <h3>Ønsker i listen:</h3>
+
     <!-- Tjek at wishes ikke er null og ikke tom -->
     <ul th:if="${wishlist.wishes != null and #lists.isNotEmpty(wishlist.wishes)}">
         <li th:each="wish : ${wishlist.wishes}">
