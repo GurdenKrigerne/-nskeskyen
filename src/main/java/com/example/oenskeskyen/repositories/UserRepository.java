@@ -1,7 +1,6 @@
 package com.example.oenskeskyen.repositories;
 
 import com.example.oenskeskyen.models.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -27,6 +26,7 @@ public class UserRepository {
         String sql = "SELECT * FROM Users";
         return jdbcTemplate.query(sql, new UserRowMapper());
     }
+
     //findUserById
     public User findUserById(int userId) {
         String sql = "SELECT * FROM Users WHERE user_id = ?";
@@ -57,8 +57,6 @@ public class UserRepository {
         String sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPassword());
     }
-}
-
 
 
     //editUser
@@ -71,10 +69,12 @@ public class UserRepository {
         );
         return rows > 0;
     }
+
     //deleteUser
     public boolean deleteUserById(int userId) {
         String sql = "DELETE FROM Users WHERE user_id = ?";
         int rows = jdbcTemplate.update(sql, userId);
         return rows > 0;
     }
+}
 
