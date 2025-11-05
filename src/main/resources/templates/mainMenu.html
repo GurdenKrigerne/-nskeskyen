@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<div class="top-bar">
+    <h1 th:text="'Velkommen, ' + ${user.name} + '!'">Velkommen</h1>
+    <a th:href="@{/users/edit/{userId}(userId=${user.userId})}" class="edit-user-btn">Rediger bruger</a>
+</div>
+
+<h2>Dine ønskelister</h2>
+
+<div class="wishlist-container">
+    <div class="wishlist-card" th:each="wishlist : ${wishlists}">
+        <a th:href="@{/wishlists/{wishlistId}(wishlistId=${wishlist.wishlistId})}"
+           th:text="${wishlist.title}">Ønskeliste titel</a>
+    </div>
+</div>
+
+<div class="new-wishlist">
+    <a th:href="@{/wishlist/add/{ownerId}(ownerId=${user.userId})}">➕ Opret ny ønskeliste</a>
+</div>
 
 </body>
 </html>

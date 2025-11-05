@@ -12,7 +12,7 @@ public class WishlistRowMapper implements RowMapper<WishList> {
     public WishList mapRow(ResultSet rs, int rowNum) throws SQLException {
        WishList wishList = new WishList();
 
-                wishList.setUserId(rs.getInt("wishlist_id")); // Unik Id for ønskelisten
+                wishList.setWishlistId(rs.getInt("wishlist_id")); // Unik Id for ønskelisten
                 wishList.setTitle(rs.getString("name")); // Ønskelistens titel
                 wishList.setDescription(rs.getString("description")); // Beskrivelse af ønskelistens indhold
                 wishList.setUserId(rs.getInt("owner_Id")); // Hvilken bruger ejeren er

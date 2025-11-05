@@ -34,8 +34,17 @@ public class UserRepository {
     }
 
     public int addUser(User user) {
-        String sql = "INSERT INTO Users (username, email, password) VALUES (?, ?, ?)";
-        return jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPassword());
+        String sql = "INSERT INTO Users (username, email, password_hash) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPassword());
+
+        Integer userId = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+
+        if (userId != null) {
+            user.setUserId(userId); // sæt ID på User objektet
+            return 1; // én række påvirket
+        } else {
+            return 0; // noget gik galt
+        }
     }
 
     public User findByEmail(String email) {
@@ -53,15 +62,10 @@ public class UserRepository {
         }
     }
 
-    public void save(User user) {
-        String sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPassword());
-    }
-
 
     //editUser
     public boolean editUser(User user) {
-        String sql = "UPDATE Users SET email = ?, password = ? WHERE user_id = ?";
+        String sql = "UPDATE Users SET email = ?, password_hash = ? WHERE user_id = ?";
         int rows = jdbcTemplate.update(sql,
                 user.getEmail(),
                 user.getPassword(),

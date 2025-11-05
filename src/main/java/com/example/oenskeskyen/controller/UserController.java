@@ -1,6 +1,7 @@
 package com.example.oenskeskyen.controller;
 
 import com.example.oenskeskyen.models.User;
+import com.example.oenskeskyen.models.WishList;
 import com.example.oenskeskyen.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -49,7 +50,7 @@ public class UserController {
         boolean success = userService.editUser(user);
 
         if (success) {
-            return "redirect:/users";
+            return "redirect:/main/" + user.getUserId();
         } else {
             return "error"; // kan være en error page eller redirect til edit med message
         }
@@ -103,7 +104,7 @@ public class UserController {
         if (userService.login(email, password)) {
             User user = userService.findByEmail(email);
             session.setAttribute("user", user);
-            return "redirect:/wishlists"; // side med brugerens ønskelister
+            return "redirect:/main/" + user.getUserId(); // side med brugerens ønskelister
         } else {
             model.addAttribute("loginError", "Forkert email eller kodeord");
             return "home";
@@ -129,6 +130,18 @@ public class UserController {
         model.addAttribute("registerSuccess", "Bruger oprettet! Log ind nu.");
         return "home";
     }
+
+    @GetMapping("/main/{userId}")
+    public String showMainMenu(@PathVariable int userId, Model model) {
+        User user = userService.findUserById(userId);
+        List<WishList> wishlists = userService.getWishlistsByUserId(userId);
+
+        model.addAttribute("user", user);
+        model.addAttribute("wishlists", wishlists);
+
+        return "mainMenu";
+    }
+
 }
 
 

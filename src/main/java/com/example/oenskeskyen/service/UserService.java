@@ -1,6 +1,7 @@
 package com.example.oenskeskyen.service;
 
 import com.example.oenskeskyen.models.User;
+import com.example.oenskeskyen.models.WishList;
 import com.example.oenskeskyen.repositories.UserRepository;
 import com.example.oenskeskyen.repositories.UserRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,12 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final WishlistService wishlistService;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, WishlistService wishlistService) {
         this.userRepository = userRepository;
+        this.wishlistService = wishlistService;
     }
 
 
@@ -69,6 +72,10 @@ public class UserService {
         }
         userRepository.addUser(user);
         return true;
+    }
+
+    public List<WishList> getWishlistsByUserId(int userId) {
+        return wishlistService.getWishlistsByUserId(userId);
     }
 
 }

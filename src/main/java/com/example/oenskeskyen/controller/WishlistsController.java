@@ -91,7 +91,7 @@ public class WishlistsController {
     public String saveWishlist(@ModelAttribute WishList wishlist, @PathVariable int ownerId) {
         wishlist.setUserId(ownerId);
         wishlistService.createWishlist(wishlist);
-        return "redirect:/wishlist/add/{ownerId}";
+        return "redirect:/main/" + ownerId;
     }
 
 
