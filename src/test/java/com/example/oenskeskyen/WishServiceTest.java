@@ -90,7 +90,7 @@ public class WishServiceTest {
         WishRepository wishRepository = mock(WishRepository.class);
 
         // Service med mocks
-        WishService wishService = new WishService(wishRepository, jdbcTemplate);
+        WishService wishService = new WishService(wishRepository, wishlistService, jdbcTemplate);
 
         // Arrange
         Wish wish = new Wish();
