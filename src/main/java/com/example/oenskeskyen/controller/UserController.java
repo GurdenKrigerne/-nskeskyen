@@ -2,12 +2,10 @@ package com.example.oenskeskyen.controller;
 
 import com.example.oenskeskyen.models.User;
 import com.example.oenskeskyen.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,6 +25,7 @@ public class UserController {
         model.addAttribute("users", users);
         return "allUsers"; // henviser til allUsers.html
     }
+
 
     //findUserById
     @GetMapping("/users/{id}")
@@ -55,6 +54,7 @@ public class UserController {
             return "error"; // kan være en error page eller redirect til edit med message
         }
     }
+
     //add user
     // GET: vis add user form
     @GetMapping("/users/add")
@@ -87,4 +87,48 @@ public class UserController {
         }
     }
 
+
+
+    @GetMapping("/")
+    public String showHomePage() {
+        return "home"; // Thymeleaf template med login og register forms
+    }
+
+    @PostMapping("/login")
+    public String loginUser(@RequestParam String email,
+                            @RequestParam String password,
+                            Model model,
+                            HttpSession session) {
+
+        if (userService.login(email, password)) {
+            User user = userService.findByEmail(email);
+            session.setAttribute("user", user);
+            return "redirect:/wishlists"; // side med brugerens ønskelister
+        } else {
+            model.addAttribute("loginError", "Forkert email eller kodeord");
+            return "home";
+        }
+    }
+
+    @PostMapping("/register")
+    public String registerUser(@RequestParam String name,
+                               @RequestParam String email,
+                               @RequestParam String password,
+                               Model model) {
+
+        User user = new User();
+        user.setName(name);
+        user.setEmail(email);
+        user.setPassword(password);
+
+        if (!userService.register(user)) {
+            model.addAttribute("registerError", "Email findes allerede");
+            return "home";
+        }
+
+        model.addAttribute("registerSuccess", "Bruger oprettet! Log ind nu.");
+        return "home";
+    }
 }
+
+
