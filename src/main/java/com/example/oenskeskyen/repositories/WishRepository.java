@@ -74,6 +74,11 @@ public class WishRepository {
         return jdbcTemplate.query(sql, new WishRowMapper(), wishlidtId);
     }
 
+    public int getWishlistIdByWishId(int wishId) {
+        String sql = "SELECT wishlist_id FROM wishlist_wish WHERE wish_id = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, wishId);
+    }
+
 
 
 

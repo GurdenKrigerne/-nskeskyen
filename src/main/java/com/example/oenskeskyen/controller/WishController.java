@@ -68,7 +68,9 @@ public class WishController {
         } else {
             model.addAttribute("message", "Ingen ønske fundet med ID " + wish.getWishId() + ".");
         }
-        return "editWish"; // viser samme HTML igen med besked
+
+        int wishlistId = wishService.getWishlistIdByWishId(wish.getWishId());
+        return "redirect:/wishlists/" + wishlistId; // viser samme HTML igen med besked
     }
 
     @GetMapping("/wishes/add/{wishlistId}")

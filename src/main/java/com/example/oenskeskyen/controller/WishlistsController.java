@@ -81,6 +81,14 @@ public class WishlistsController {
         model.addAttribute("wishlist", wishlist); // <-- vigtigt: navnet "wishlist" matcher th:object="${wishlist}"
         return "editWishlist";
     }
+
+    @PostMapping("/wishlists/edit")
+    public String editWishlist(@ModelAttribute WishList wishlist) {
+        wishlistService.editWishlist(wishlist); // Gem ændringer
+        return "redirect:/main/" + wishlist.getUserId(); // Gå tilbage til main menu
+    }
+
+
     @GetMapping("/wishlist/add/{ownerId}")
     public String addWishlist(@PathVariable int ownerId, Model model) {
         model.addAttribute("wishlist", new WishList());

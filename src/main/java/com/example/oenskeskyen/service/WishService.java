@@ -51,4 +51,8 @@ public class WishService {
         return wishRepository.getWishesByWishlistId(wishlistId);
     }
 
+    public int getWishlistIdByWishId(int wishId) {
+        return wishRepository.getWishlistIdByWishId(wishId);
+    }
+
 }

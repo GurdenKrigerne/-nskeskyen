@@ -14,6 +14,7 @@
 
 <!-- Rediger formular -->
 <form th:action="@{/wishlists/edit}" th:object="${wishlist}" method="post">
+    <input type="hidden" th:field="*{userId}">
     <input type="hidden" th:field="*{wishlistId}">
 
     <label for="title">Titel:</label><br>
@@ -30,6 +31,5 @@
     <p th:text="${message}"></p>
 </div>
 
-<a href="/wishlists">Tilbage til ønskelister</a>
 </body>
 </html>

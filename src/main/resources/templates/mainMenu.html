@@ -14,8 +14,20 @@
 
 <div class="wishlist-container">
     <div class="wishlist-card" th:each="wishlist : ${wishlists}">
+        <!-- Link til ønskelisten -->
         <a th:href="@{/wishlists/{wishlistId}(wishlistId=${wishlist.wishlistId})}"
            th:text="${wishlist.title}">Ønskeliste titel</a>
+
+        <!-- Rediger ønskeliste -->
+        <a th:href="@{/wishlists/edit/{wishlistId}(wishlistId=${wishlist.wishlistId})}">✏️ Rediger</a>
+
+        <!-- Slet ønskeliste -->
+        <form th:action="@{/wishlists/delete}" method="post" style="display:inline;">
+            <input type="hidden" th:name="wishlistId" th:value="${wishlist.wishlistId}" />
+            <button type="submit" onclick="return confirm('Er du sikker på, at du vil slette denne ønskeliste?');">
+                🗑️ Slet
+            </button>
+        </form>
     </div>
 </div>
 
