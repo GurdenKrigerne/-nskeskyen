@@ -1,5 +1,6 @@
 package com.example.oenskeskyen.service;
 
+import com.example.oenskeskyen.models.Wish;
 import com.example.oenskeskyen.models.WishList;
 import com.example.oenskeskyen.repositories.WishlistRepository;
 import org.springframework.stereotype.Service;
@@ -9,10 +10,14 @@ import java.util.List;
 @Service
 public class WishlistService {
 
-    WishlistRepository wishlistRepository;
 
-    public WishlistService(WishlistRepository wishlistRepository) {
+    private final WishlistRepository wishlistRepository;
+    private final WishService wishService;
+
+
+    public WishlistService(WishlistRepository wishlistRepository, WishService wishService) {
         this.wishlistRepository = wishlistRepository;
+        this.wishService = wishService;
     }
 
     //getAllWishlists
@@ -51,5 +56,10 @@ public class WishlistService {
     public List<WishList> getWishlistsByUserId(int userId) {
         return wishlistRepository.getWishlistsByUserId(userId);
     }
+
+    public List<Wish> getWishesByWishlistId(int wishlistId) {
+        return wishService.getWishesByWishlistId(wishlistId);
+    }
+
 
 }

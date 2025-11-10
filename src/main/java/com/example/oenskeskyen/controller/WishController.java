@@ -39,18 +39,12 @@ public class WishController {
     }
 
     // DELETE /wishes/delete/{id}
-    @PostMapping("/wishes/delete")
-    public String deleteWishById(@RequestParam("wishId") int wishId, Model model) {
-        boolean deleted = wishService.deleteWish(wishId);
-
-        if (deleted) {
-            model.addAttribute("message", "Ønsket med ID " + wishId + " blev slettet!");
-        } else {
-            model.addAttribute("message", "Ingen ønske fundet med ID " + wishId + ".");
-        }
-
-        return "deleteWish"; // vis samme side igen med besked
+    @PostMapping("/wishes/delete/{id}")
+    public String deleteWish(@PathVariable int id, @RequestParam int wishlistId) {
+        wishService.deleteWish(id);
+        return "redirect:/wishlists/" + wishlistId;
     }
+
 
 
     // GET /wishes/edit/{id} - vis form med eksisterende data
@@ -90,18 +84,9 @@ public class WishController {
         System.out.println("modtaget wishlistId: " + wishlistId);
         System.out.println("Wish info: " + wish.getTitle() + ", " + wish.getDescription() + ", " + wish.getPrice() + ", " + wish.getUrl());
         wishService.addWishToWishlist(wish, wishlistId);
-        return "redirect:/wishes/add/" + wishlistId;
+        return "redirect:/wishlists/" + wishlistId;
     }
 
-    @GetMapping("/wishes/list/{wishlistId}")
-    public String viewWishesByWishlist(@PathVariable int wishlistId, Model model) {
-        List<Wish> wishes = wishService.getWishesByWishlistId(wishlistId);
-        String wishlistName = wishService.getWishlistNameById(wishlistId);
-        model.addAttribute("wishes", wishes);
-        model.addAttribute("wishlistName", wishlistName);
-        model.addAttribute("wishlistId", wishlistId);
-        return "wishesList";
-    }
 
 }
 

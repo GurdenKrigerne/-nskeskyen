@@ -5,32 +5,40 @@
     <title>Ønskeliste detaljer</title>
 </head>
 <body>
-<h1>Detaljer for Ønskeliste</h1>
+<h1 th:text="${wishlist.title}">Detaljer for Ønskeliste</h1>
 
-<!-- Hvis wishlist findes -->
-<div th:if="${wishlist != null}">
-    <p><strong>ID:</strong> <span th:text="${wishlist.wishlistId}"></span></p>
-    <p><strong>Titel:</strong> <span th:text="${wishlist.title}"></span></p>
-    <p><strong>Beskrivelse:</strong> <span th:text="${wishlist.description}"></span></p>
+<p><strong>ID:</strong> <span th:text="${wishlist.wishlistId}"></span></p>
+<p><strong>Beskrivelse:</strong> <span th:text="${wishlist.description}"></span></p>
 
-    <h3>Ønsker i listen:</h3>
+<h3>Ønsker i listen:</h3>
 
-    <!-- Tjek at wishes ikke er null og ikke tom -->
-    <ul th:if="${wishlist.wishes != null and #lists.isNotEmpty(wishlist.wishes)}">
-        <li th:each="wish : ${wishlist.wishes}">
-            <strong th:text="${wish.title}"></strong> –
-            <span th:text="${wish.price}"></span> kr
-            <p th:text="${wish.description}"></p>
-        </li>
-    </ul>
-    <p th:if="${wishlist.wishes == null or #lists.isEmpty(wishlist.wishes)}">Der er ingen ønsker i denne ønskeliste.</p>
+<ul th:if="${wishlist.wishes != null and !wishlist.wishes.isEmpty()}">
+    <li th:each="wish : ${wishlist.wishes}">
+        <strong th:text="${wish.title}"></strong> – <span th:text="${wish.price}"></span> kr
+        <p th:text="${wish.description}"></p>
+
+        <!-- Rediger knap -->
+        <a class="button" th:href="@{/wishes/edit/{id}(id=${wish.wishId})}">✏️ Rediger</a>
+
+        <!-- Slet knap -->
+        <form th:action="@{/wishes/delete/{id}(id=${wish.wishId})}" method="post" style="display:inline;">
+            <input type="hidden" name="wishlistId" th:value="${wishlist.wishlistId}" />
+            <button class="button" type="submit" onclick="return confirm('Er du sikker på, at du vil slette dette ønske?');">🗑️ Slet</button>
+        </form>
+
+    </li>
+</ul>
+
+<p th:if="${wishlist.wishes == null or wishlist.wishes.isEmpty()}">
+    Der er ingen ønsker i denne ønskeliste.
+</p>
+
+<div class="buttons">
+    <!-- Tilføj nyt ønske -->
+    <a class="button" th:href="@{/wishes/add/{wishlistId}(wishlistId=${wishlist.wishlistId})}">➕ Tilføj Ønske</a>
+
+    <!-- Tilbage til hovedmenu -->
+    <a class="button" th:href="@{/main/{userId}(userId=${wishlist.userId})}">🏠 Tilbage til Hovedmenu</a>
 </div>
-
-<!-- Hvis der er fejlbesked -->
-<div th:if="${errorMessage != null}">
-    <p style="color:red" th:text="${errorMessage}"></p>
-</div>
-
-<a href="/wishlists">Tilbage til alle ønskelister</a>
 </body>
 </html>

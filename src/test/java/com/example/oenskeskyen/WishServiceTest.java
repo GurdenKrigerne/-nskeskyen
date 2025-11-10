@@ -29,7 +29,7 @@ public class WishServiceTest {
         wishRepository = mock(WishRepository.class);
 
         // Inject mocken ind i service
-        wishService = new WishService(wishRepository, wishlistService, new JdbcTemplate());
+        wishService = new WishService(wishRepository,  new JdbcTemplate());
     }
 
     @Test
@@ -90,7 +90,7 @@ public class WishServiceTest {
         WishRepository wishRepository = mock(WishRepository.class);
 
         // Service med mocks
-        WishService wishService = new WishService(wishRepository, wishlistService, jdbcTemplate);
+        WishService wishService = new WishService(wishRepository, jdbcTemplate);
 
         // Arrange
         Wish wish = new Wish();

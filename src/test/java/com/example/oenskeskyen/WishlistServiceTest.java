@@ -2,6 +2,7 @@ package com.example.oenskeskyen;
 
 import com.example.oenskeskyen.models.WishList;
 import com.example.oenskeskyen.repositories.WishlistRepository;
+import com.example.oenskeskyen.service.WishService;
 import com.example.oenskeskyen.service.WishlistService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -17,7 +18,8 @@ public class WishlistServiceTest {
     void deleteWishlist_returnsTrue_whenRepositoryDeletesSuccessfully() {
         // Arrange
         WishlistRepository mockRepo = mock(WishlistRepository.class);
-        WishlistService service = new WishlistService(mockRepo);
+        WishService mockService = mock(WishService.class);
+        WishlistService service = new WishlistService(mockRepo, mockService);
 
         when(mockRepo.deleteWishlistById(1)).thenReturn(true);
 
@@ -34,7 +36,8 @@ public class WishlistServiceTest {
 
         // Mock test data
         WishlistRepository mockRepo = Mockito.mock(WishlistRepository.class);
-        WishlistService service = new WishlistService(mockRepo);
+        WishService mockService = mock(WishService.class);
+        WishlistService service = new WishlistService(mockRepo, mockService);
 
         WishList fakeWishlist = new WishList(1, "Fødselsdag", "Ting jeg ønsker mig", 1);
         when(mockRepo.findWishlistById(1)).thenReturn(fakeWishlist);
@@ -52,7 +55,8 @@ public class WishlistServiceTest {
     void testEditWishlist_returnsTrue_whenUpdateSuccessful() {
         // Arrange
         WishlistRepository mockRepo = mock(WishlistRepository.class);
-        WishlistService service = new WishlistService(mockRepo);
+        WishService mockService = mock(WishService.class);
+        WishlistService service = new WishlistService(mockRepo, mockService);
 
         WishList wishlist = new WishList(1, "Jul", "Nye ønsker", 1);
         when(mockRepo.editWishlist(wishlist)).thenReturn(true);

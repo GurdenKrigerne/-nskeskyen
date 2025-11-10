@@ -42,6 +42,8 @@ public class WishlistsController {
            return "findWishlistById";
        }
 
+       wishlist.setWishes(wishlistService.getWishesByWishlistId(id));
+
        model.addAttribute("wishlist", wishlist);
        return "findWishlistById"; // viser HTML-side med ønskelisten
    }

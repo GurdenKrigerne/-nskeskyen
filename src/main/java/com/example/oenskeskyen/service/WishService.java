@@ -11,12 +11,10 @@ import java.util.List;
 public class WishService {
 
     private final WishRepository wishRepository;
-    private final WishlistService wishlistService;
     private final JdbcTemplate jdbcTemplate;
 
-    public WishService(WishRepository wishRepository, WishlistService wishlistService, JdbcTemplate jdbcTemplate) {
+    public WishService(WishRepository wishRepository, JdbcTemplate jdbcTemplate) {
         this.wishRepository = wishRepository;
-        this.wishlistService = wishlistService;
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -53,7 +51,4 @@ public class WishService {
         return wishRepository.getWishesByWishlistId(wishlistId);
     }
 
-    public String getWishlistNameById(int wishlistId) {
-        return wishlistService.getWishlistNameById(wishlistId);
-    }
 }
